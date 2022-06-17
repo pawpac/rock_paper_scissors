@@ -1,4 +1,4 @@
-// Function that generates random pick
+// Generates random pick
 
 function computerPlay () {
   let move;
@@ -13,15 +13,26 @@ function computerPlay () {
   return move;
 }
 
+// Announce the winner
+function winner(counter, user, pc) {
+    if (counter === 4 && user > pc) {
+        alert("YOU WIN!");
+    } else if (counter === 4 && user < pc) {
+        alert("YOU LOOSE");
+    } else if (counter === 4 && user === pc) { 
+        alert("TIE!");
+}
+}
 
-// Function that prompt user to make their choice
+
+// Prompt user to make their choice
 
 function playerSelection() {
   let move = prompt("Rock, paper, or scissors? Make your move!");
   return move.toLowerCase();
 }
 
-// Five iterations of singleRound functions with playerSelection and computerPlay parameters
+// Five iterations of singleRound functions with playerSelection and computerPlay as parameters
 
 function game() {
 let player = 0;
@@ -55,5 +66,7 @@ for (let i = 0; i < 5; i++) {
         alert("player: " + player + " computer: " + computer);
     } else { alert("Tie! player: " + player + " computer: " + computer);
     }
+
+    winner(i, player, computer);
 }
 }
