@@ -1,72 +1,85 @@
-// Generates random pick
+let playerPoint = 0;
+let computerPoint = 0;
+let result;
+let counter = 0;
 
-function computerPlay () {
-  let move;
+const playerDigit = document.querySelector('#playerDigit');
+const computerDigit = document.querySelector('#computerDigit');
+const playerSelection = document.querySelector('#playerChoice');
+const computerSelection = document.querySelector('#computerChoice');
+const results = document.querySelector('#result');
+const btns = document.querySelector('#btns');
+const restartBtn = document.querySelector('#hidden');
+const buttons = document.querySelectorAll('.button');
+
+buttons.forEach(btn => btn.addEventListener('click', () => {
+  counter++;
+  player = btn.textContent;
+  computerChoice();
+  playerSelection.textContent = player;
+  computerSelection.textContent = computer;
+  results.textContent = game(player, computer);
+  if (game(player, computer) === "point for player") {
+    playerDigit.value = parseInt(playerDigit.value) + 1;
+  } else if (game(player, computer) === "point for computer") {
+    computerDigit.value = parseInt(computerDigit.value) + 1;
+  }
+  playerDigit.textContent = playerPoint;
+  computerDigit.textContent = computerPoint;
+  if (counter === 5) {
+    btns.style.display = 'none';
+    restartBtn.style.display = 'block';
+  }
+
+
+point(game(player, computer));
+winner(playerPoint, computerPoint);
+}));
+
+function computerChoice() {
   let result = Math.random().toFixed(1);
   if (result > 0 && result <= 0.3) {
-      move = "rock";
+      computer = "rock";
   } else if (result > 0.3 && result <= 0.6) {
-      move = "paper";
+      computer = "paper";
   } else {
-      move = "scissors";
+      computer = "scissors";
   }
-  return move;
+  return computer;
 }
 
-// Announce the winner
-function winner(counter, user, pc) {
-    if (counter === 4 && user > pc) {
-        alert("YOU WIN!");
-    } else if (counter === 4 && user < pc) {
-        alert("YOU LOOSE");
-    } else if (counter === 4 && user === pc) { 
-        alert("TIE!");
+function game(player, computer) {
+  if ((player === "rock") && (computer === "paper")) {
+      return "point for computer";
+  } else if ((player === "rock") && (computer === "scissors")) {
+      return "point for player";
+  } else if ((player === "paper") && (computer === "rock")) {
+      return "point for player";
+  } else if ((player === "paper") && (computer === "scissors")) {
+      return "point for computer";
+  } else if ((player === "scissors") && (computer === "rock")) {
+      return "point for computer";
+  } else if ((player === "scissors") && (computer === "paper")) {
+      return "point for player";
+  } else {
+      return "tie";
+  }
 }
-}
 
-
-// Prompt user to make their choice
-
-function playerSelection() {
-  let move = prompt("Rock, paper, or scissors? Make your move!");
-  return move.toLowerCase();
-}
-
-// Five iterations of singleRound functions with playerSelection and computerPlay as parameters
-
-function game() {
-let player = 0;
-let computer = 0;
-for (let i = 0; i < 5; i++) {
-    function singleRound(playerMove, computerMove) {
-        if (playerMove === "rock" && computerMove === "paper") {
-            return "computer";
-        } else if (playerMove === "rock" && computerMove === "scissors") {
-            return "player";
-        } else if (playerMove === "paper" && computerMove === "rock") {
-            return "player";
-        } else if (playerMove === "paper" && computerMove === "scissors") {
-            return "computer";
-        } else if (playerMove === "scissors" && computerMove === "rock") {
-            return "computer";
-        } else if (playerMove === "scissors" && computerMove === "paper") {
-            return "player";
-        } else {
-            return "tie";
-        }
-      }
-
-      roundResult = singleRound(playerSelection(), computerPlay());
-
-    if (roundResult === "player") {
-        ++player;
-        alert("player: " + player + " computer: " + computer);
-    } else if (roundResult === "computer") {
-        ++computer;
-        alert("player: " + player + " computer: " + computer);
-    } else { alert("Tie! player: " + player + " computer: " + computer);
+function winner(user, pc) {
+    if ((counter === 5) && (user > pc)) {
+        return results.textContent = "YOU WIN!";
+    } else if ((counter === 5) && (user < pc)) {
+        return results.textContent = "YOU LOOSE";
+    } else if ((counter === 5) && (user === pc)) { 
+        return results.textContent = "TIE!";
     }
-
-    winner(i, player, computer);
 }
+
+function point(roundResult) {
+    if (roundResult === "point for player") {
+        return ++playerPoint;
+    } else if (roundResult === "point for computer") {
+        return ++computerPoint;
+    }
 }
