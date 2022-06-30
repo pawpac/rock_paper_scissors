@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Rock Paper Scissors</title>
-    <meta charset="UTF-8">
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <h1>Rock Paper Scissors</h1>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="game">
+    <div class="playerVsComputer">
+      <div class="test">
+        <div class="result">
+          <div class="player"><p class="players">Player:</p></div>
+          <input type="text" class="digit" id="playerDigit" readonly="" value="0" autocomplete="off">
+        </div>
+          <div id="playerChoice"><p>...</p></div>
+      </div>
+      <div class="test">
+        <div class="result">
+          <div class="computer"><p class="players">Computer:</p></div>
+          <input type="text" class="digit" id="computerDigit" readonly="" value="0" autocomplete="off">
+        </div>
+          <div id="computerChoice"><p>...</p></div>
+      </div>
+    </div>
+    <div class="consoleAndButtons">
+      <div class="console">
+        <div class="display" id="result"><p>make your choice</p></div>
+      </div>
+      <div class="buttons" id="btns">
+        <button class="button">rock</button>
+        <button class="button">paper</button>
+        <button class="button">scissors</button>
+      </div>
+      <div class="hide" id="hidden">
+        <button class="button" onmousedown="window.location.reload();">Try again!</button>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
