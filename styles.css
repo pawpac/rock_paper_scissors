@@ -111,3 +111,20 @@ body {
   width: 200px;
   text-align: center;
 }
+
+@media screen and (max-width: 450px) {
+  .game {
+    width: 100vh;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button,
+  .button:hover {
+    padding: 30px;
+  }
+}
+
